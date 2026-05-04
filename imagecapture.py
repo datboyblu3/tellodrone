@@ -38,7 +38,7 @@ def getKeyboardInput():
     if kp.getKey("q"): me.land(); time.sleep(3)
     if kp.getKey("e"):  me.takeoff()
     if kp.getKey("z"):
-        cv2.imwrite(f'Resources/Images/{time.time()}.jpg', img)
+        cv2.imwrite(f'images/{time.time()}.jpg', img)
 
         time.sleep(0.3)
 
