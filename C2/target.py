@@ -7,21 +7,21 @@ import socket
 import time
 from djitellopy import Tello
 
-target_DRONE_IP = "192.168.1.102"   # target drone IP
+TARGET_DRONE_IP   = "0.0.0.0"   # target drone IP
 RELAY_PORT        = 9000
 
-# --- Listen socket ---
+#Listen socket
 server = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
 server.bind(("0.0.0.0", RELAY_PORT))
 server.settimeout(30)   # seconds to wait for next command before giving up
 
-# --- Connect target drone ---
+#Connect target drone
 target = Tello(target_DRONE_IP)
 target.connect()
 print(f"[target] Battery: {target.get_battery()}%")
 print(f"[target] Listening on port {RELAY_PORT} ...")
 
-# --- Command dispatch table ---
+#Command dispatch table
 # Maps string names → bound Tello methods that accept integer args
 COMMANDS = {
     "takeoff":                    target.takeoff,
@@ -38,7 +38,7 @@ COMMANDS = {
     "flip_back":                  target.flip_back,
 }
 
-# --- Receive loop ---
+#Receive loop
 while True:
     try:
         data, addr = server.recvfrom(1024)
